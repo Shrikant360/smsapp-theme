@@ -1,0 +1,121 @@
+.worldwide {
+    padding: 55px 0px 150px;
+    background-image: url(https://360smsapp.com/wp-content/uploads/2024/07/bg-1.png);
+      background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+ul.counter_main {
+    display: flex;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+    gap: 59px;
+    flex-wrap: wrap;
+    /* Allow items to wrap */
+}
+
+.uneviling .row {
+    row-gap: 30px;
+}
+
+.uneviling_inner img {
+    width: 40px;
+}
+
+.uneviling_inner {
+    padding-bottom: 17px;
+    display: flex;
+    justify-content: start;
+    gap: 16px;
+    align-items: center;
+}
+
+.footer h2 {
+    text-align: left;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+h3.animated.fadeIn {
+    font-weight: 700;
+    font-size: 18px;
+    font-family: 'Poppins';
+    text-transform: capitalize;
+    color: #001b30;
+    line-height: 24px;
+    margin: 0;
+    padding-top: 24px;
+}
+
+li.cunter_inner {
+    text-align: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+li.cunter_inner h2 {
+    font-weight: 800;
+    color: #0673ba;
+    font-size: 46px;
+    font-family: 'Poppins';
+    background: #ffffff;
+    border-radius: 50%;
+    height: 160px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    margin: 0;
+}
+
+@media (max-width: 1200px) {
+    ul.counter_main {
+        gap: 40px;
+        /* Reduce gap */
+    }
+
+    li.cunter_inner h2 {
+        font-size: 36px;
+        /* Slightly smaller font */
+        height: 140px;
+        width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    ul.counter_main {
+        flex-direction: column;
+        /* Stack items vertically */
+        gap: 30px;
+    }
+
+    li.cunter_inner h2 {
+        font-size: 30px;
+        /* Smaller font size */
+        height: 120px;
+        width: 120px;
+    }
+
+    h3.animated.fadeIn {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    li.cunter_inner h2 {
+        font-size: 24px;
+        height: 100px;
+        width: 100px;
+    }
+
+    h3.animated.fadeIn {
+        font-size: 14px;
+    }
+}

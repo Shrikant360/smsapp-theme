@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<?php get_header('sms'); ?>
+<style>
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  color: #000;
+  background: #fff;
+}
+.sms-privacy-archive-hero {
+			background: linear-gradient(90deg, #EEF4FF 0%, #F7F7F5 65%) !important;
+			padding: clamp(40px, 6vw, 70px) 0;
+			
+		}
+
+		.sms-privacy-archive-wrap h1.sms-privacy-archive-hero-title {
+			color: #000000;
+			margin: 0;
+			padding: 0;
+			border: 0;
+			/*text-transform: uppercase;*/
+			letter-spacing: 0.08em;
+			font-size: clamp(28px, 3vw, 45px) !important;
+			font-weight: 700;
+			line-height: 1.25;
+			margin:0 !important;
+		}
+
+
+/* ── Page title ── */
+#page-title {
+  background: #00bcd4;
+  padding: 28px 20px;
+  text-align: center;
+}
+#page-title h1 { color: #fff; font-size: 26px; letter-spacing: 1px; }
+
+/* ── Layout shell ── */
+.container_tab {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════
+   SIDEBAR
+═══════════════════════════════ */
+.sidebar {
+  flex: 0 0 280px;
+  width: 280px;
+  min-width: 280px;
+  background: #f4f4f4;
+  border-right: 1px solid #ddd;
+  /* FIX: proper sticky-scroll setup */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+
+/* FIX: scroll hint — placed as a sticky bottom bar inside sidebar */
+.sidebar-scroll-hint {
+  display: none; /* shown only on mobile via media query */
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, #f4f4f4 60%);
+  padding: 10px 12px 6px;
+  font-size: 11px;
+  color: #777;
+  text-align: right;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Section header (non-clickable label) ── */
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  background: #e8e8e8;
+  border-left: 3px solid #00bcd4;
+  margin: 6px 0 2px;
+  letter-spacing: 0.3px;
+  cursor: default;
+  user-select: none;
+}
+
+/* ── All sidebar buttons ── */
+.sidebar button.tablink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  padding: 8px 12px 8px 20px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  outline: none;
+}
+.sidebar button.tablink:hover {
+  background: #e2f7fa;
+  color: #00838f;
+  text-decoration: none;
+}
+.sidebar button.tablink.active {
+  background: #00bcd4;
+  color: #fff;
+  font-weight: 700;
+  border-left-color: #007c8a;
+}
+
+/* FIX: nested list buttons get slightly more indent */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 4px 0;
+}
+.sidebar ul li {
+  padding: 0;
+}
+.sidebar ul li button.tablink {
+  padding-left: 30px;
+  font-size: 12.5px;
+}
+
+/* ── Arrow icon ── */
+.arrow { display: none; }
+
+/* ═══════════════════════════════
+   CONTENT AREA
+═══════════════════════════════ */
+.content {
+  flex: 1 1 0;
+  min-width: 0;            /* FIX: prevent overflow in flex child */
+  padding: 30px 36px 60px;
+  overflow: visible;
+}
+
+/* ── Tab panels ── */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── Typography ── */
+.content h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00838f;
+  border-bottom: 2px solid #00bcd4;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+.content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 20px 0 8px;
+  line-height: 1.4;
+}
+.content h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 14px 0 6px;
+}
+.content p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+  color: #222;
+}
+.content ul, .content ol {
+  padding-left: 22px;
+  margin-bottom: 12px;
+}
+.content ul li, .content ol li {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+.content table td, .content table th {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  vertical-align: top;
+}
+.content table tr:first-child td {
+  background: #e8f7f9;
+  font-weight: 700;
+}
+.content a { color: #00838f; }
+.content a:hover { color: #005f69; }
+
+/* FIX: last-block spacing only inside content */
+.content .tab-content:last-of-type > *:last-child {
+  padding-bottom: 80px;
+}
+
+/* ═══════════════════════════════
+   MOBILE  ≤ 768px
+═══════════════════════════════ */
+@media (max-width: 768px) {
+  .container_tab {
+    flex-direction: column;
+  }
+
+  /* FIX: sidebar becomes fixed-height scrollable strip on mobile */
+  .sidebar {
+    position: relative;   /* not sticky on mobile */
+    flex: none;
+    width: 100%;
+    min-width: unset;
+    height: auto;
+    max-height: 220px;
+    overflow-y: auto;
+    border-right: none;
+    border-bottom: 2px solid #00bcd4;
+    padding-bottom: 0;
+  }
+
+  /* FIX: scroll hint works correctly inside the sidebar */
+  .sidebar-scroll-hint {
+    display: block;
+  }
+
+  .content {
+    width: 100%;
+    padding: 20px 16px 60px;
+  }
+
+  /* tighten nested indent a little on mobile */
+  .sidebar ul li button.tablink {
+    padding-left: 24px;
+  }
+}
+
+/* ── Narrow phone extras (360–600 px) ── */
+@media screen and (min-width: 360px) and (max-width: 600px) {
+  body div.mm-dropdown ul li,
+  body div.mm-dropdown div.textfirst {
+    padding: 0 3px !important;
+    width: 67px !important;
+    height: 26px !important;
+  }
+}
+@media screen and (min-width: 320px) {
+  body .inp-num {
+    width: 93px !important;
+    height: 27px !important;
+  }
+}
+
+/* ── Smart Doc section titles ── */
+.smart-doc-terms p > strong:first-child,
+.smart-doc-terms > div > p > strong {
+  display: block;
+  font-size: 15px;
+  color: #00838f;
+  margin: 18px 0 4px;
+}
+
+/* ── WhatSync section fix ── */
+.sla-text { font-size: 14px; line-height: 1.7; }
+.sla-text h3 { font-size: 16px; margin: 18px 0 8px; }
+.sla-text h4 { font-size: 14px; margin: 14px 0 6px; }
+.sla-text p  { margin-bottom: 10px; }
+.sla-text ul { margin: 0 0 10px 18px; }
+</style>
+</head>
+<body>
+
+<section class="sms-privacy-archive-hero text-center w-100">
+			<div class="container">
+				<h1 class="sms-privacy-archive-hero-title" style="
+    margin: auto;">Terms of service</h1>
+			</div>
+		</section>
+
+<div class="container_tab">
+
+  <!-- ═══════ SIDEBAR ═══════ -->
+  <div class="sidebar">
+
+    <button class="tablink active" onclick="openTab(event,'tab20')"><b>TERMS &amp; CONDITIONS</b></button>
+
+    <ul>
+      <li><button class="tablink" id="tab-btn-21" onclick="openTab(event,'tab21')">ACCEPTABLE USE POLICY</button></li>
+      <li><button class="tablink" id="tab-btn-2"  onclick="openTab(event,'tab2')">INTELLECTUAL PROPERTY RIGHTS</button></li>
+      <li><button class="tablink" id="tab-btn-7"  onclick="openTab(event,'tab7')">SECURITY OVERVIEW</button></li>
+      <li><button class="tablink" id="tab-btn-22" onclick="openTab(event,'tab22')">DATA PROTECTION ADDENDUM</button></li>
+    </ul>
+
+    <!-- FIX: non-clickable header, not a tablink button -->
+    <div class="sidebar-section-header">TYPES OF SERVICES</div>
+
+    <ul>
+      <li><button class="tablink" onclick="openTab(event,'tab1')">AI AGENT</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab4')">RINGLESS VOICEMAIL</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab5')">CTI</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab6')">LOCAL TIMEZONE FINDER</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab8')">EMAIL SYNC</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab9')">EMAIL UNSUBSCRIBE/OPT-OUT</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab10')">WHATSSYNC</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab12')">HIGHLIGHTER</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab13')">SMS SERVICE</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab14')">LINE</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab15')">SMART DOCS</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab16')">WHATSAPP BUSINESS</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab17')">MASS EMAIL</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab18')">MERGE DUPLICATES</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab19')">VTM &amp; VTP</button></li>
+      <li><button class="tablink" onclick="openTab(event,'tab23')">TEXTOLIC</button></li>
+    </ul>
+
+    <!-- FIX: scroll hint lives inside sidebar, rendered at bottom -->
+    <div class="sidebar-scroll-hint">Scroll for more ↓</div>
+  </div><!-- /sidebar -->
+
+  <!-- ═══════ CONTENT ═══════ -->
+  <div class="content">
+
+    <!-- TAB 20: Terms & Conditions (default active) -->
+    <div id="tab20" class="tab-content active">
+      <h2>TERMS AND CONDITIONS FOR ALL SERVICES</h2>
+      <p>It is important that you review and understand these terms before using our services. All the terms are legally binding.</p>
+      <p>Our services are generally intended for business or professional use only.</p>
+      <p><em>These terms are effective on the date you accept them. This includes any additional terms that are referenced in these terms and available at hyperlinks and any order forms that you may execute with 360 Degree.</em></p>
+      <p><em>PLEASE REVIEW THESE "360 DEGREE" TERMS OF SERVICE CAREFULLY.</em></p>
+      <p>These 360 DEGREE CLOUD Terms of Service ("<strong>Agreement</strong>") set forth the terms for your use of the Services and are effective as of the date you accept or otherwise agree to the terms of 360 Degree Cloud agreement. This consists of these 360 DEGREE Terms of Service, and terms referenced in these Terms of Service which are available at hyperlinks, and any applicable Order Form(s) (as defined below). This is between the applicable 360 DEGREE entity identified below ("<strong>360 Degree</strong>" or "<strong>360 Degree Cloud</strong>") and you or the organization on whose behalf you are accepting or otherwise agreeing to the terms of this Agreement ("<strong>you</strong>", "<strong>your</strong>", "<strong>yours</strong>", or "<strong>Customer</strong>")</p>
+      <p><em>These terms might change. We will let you know at least 30 days before we make any significant changes that impact you or your use of our services, unless we are unable to because of changes in laws, regulations, or carrier requirements. The updated version of these terms will be posted on this page.</em></p>
+      <p><em>If you keep using our services after these terms have changed and gone into effect, that means you have accepted those changes and they are legally binding on you. If you do not agree with the changed terms, you must stop using our services immediately.</em></p>
+
+      <h3>1. Definitions</h3>
+      <p><strong>Affiliate</strong> means any entity that directly or indirectly controls or is controlled by, or is under common control with, the party specified.</p>
+      <p>"<strong>Customer Data</strong>" means any data (a) provided by you or your End Users to 360 Degree in connection with your use of the Services or (b) generated for your use as part of the Services.</p>
+      <p>"<strong>Customer Services</strong>" means any software application or other products and services provided by you and used in connection with your use of the Services under this Agreement.</p>
+      <p>"<strong>Documentation</strong>" means 360 Degree's documentation, including any usage guides and policies, for the Services.</p>
+      <p>"<strong>End User</strong>" means any user of the Services, including via any Customer Services.</p>
+      <p>"<strong>Malicious Code</strong>" means code, files, scripts, agents, or programs intended to do harm, including viruses, worms, time bombs and Trojan horses.</p>
+      <p>"<strong>Order Form</strong>" means an ordering document between you and 360 Degree, or any of their Affiliates, that specifies mutually agreed upon rates for certain Services and any commercial terms related thereto.</p>
+      <p>"<strong>360 Degree Acceptable Use Policy</strong>" — current version available at <a href="#" onclick="openTab(event,'tab21','tab-btn-21')">360 Degree Acceptable Use Policy</a>.</p>
+      <p>"<strong>360 degree intellectual property rights</strong>" — current version available at <a href="#" onclick="openTab(event,'tab2','tab-btn-2')">360 degree intellectual property rights</a>.</p>
+      <p>"<strong>360 degree security overview</strong>" — current version available at <a href="#" onclick="openTab(event,'tab7','tab-btn-7')">360 degree security overview</a>.</p>
+      <p>"<strong>360 Degree Data Protection Addendum</strong>" — current version available at <a href="#" onclick="openTab(event,'tab22','tab-btn-22')">360 Degree Data Protection Addendum</a>.</p>
+      <p>"<strong>Intellectual Property Rights</strong>" means patents, trademarks, service marks, trade names, design rights, copyright, database rights, know-how and other intellectual property rights whether registered or unregistered.</p>
+
+      <h3>2. SERVICES</h3>
+      <p>2.1 <strong>Provision of the Services.</strong> 360 degree will: (a) provide the Services pursuant to this Agreement, applicable Documentation, and any applicable Order Form(s); (b) comply with the applicable 360 degree SLA; (c) comply with the security terms set forth in the 360 degree Security Overview; (d) provide the Services in accordance with applicable law; (e) make commercially reasonable efforts to scan, detect, and delete Malicious Code; and (f) use commercially reasonable efforts to provide applicable support for the Services.</p>
+      <p>2.2 <strong>Customer Responsibilities.</strong> Customer shall: (a) be solely responsible for all use of the Services under your account; (b) not transfer, resell, lease, license, or otherwise make available the Services to third parties; (c) use the Services only in accordance with this Agreement, the 360 degree Acceptable Use Policy, applicable Documentation, any applicable Order Form(s), and applicable law; (d) be solely responsible for all acts, omissions, and activities of your End Users; (e) use commercially reasonable efforts to prevent unauthorized access to the Services; and (f) provide reasonable cooperation regarding information requests from law enforcement, regulators, or telecommunications providers.</p>
+      <p>2.3 <strong>Suspension of Services.</strong> 360 Degree may suspend the Services upon written notice if 360 Degree determines: (a) that you or your End Users materially breach the 360 Degree Acceptable Use Policy; (b) there is an unusual and material spike in your use of the Services that is fraudulent or materially and negatively impacting the operating capability of the Services; (c) that its provision of the Services is prohibited by applicable law or regulation; (d) there is any use of the Services that threatens the security, integrity, or availability of the Services; or (e) that information in your account is untrue, inaccurate, or incomplete.</p>
+      <p>2.4 <strong>Changes to the Services.</strong> You acknowledge that the features and functions of the Services may change over time; provided, however, 360 Degree will not materially decrease the overall functionality of the Services.</p>
+
+      <h3>3. FEES AND PAYMENT TERMS</h3>
+      <p>3.1 <strong>Fees.</strong> Customers agree to pay the fees for the specified services set forth in the applicable signed Order Form(s).</p>
+      <p>3.2 <strong>Invoicing.</strong> Invoices will be sent each month via email; you will pay the Fees due within thirty (30) days of the date of the invoice. If you fail to pay, 360 degree may assess a late fee of 1.5% per month and suspend provision of the Services until the Fees due are paid in full.</p>
+      <p>3.3 <strong>Payment Disputes.</strong> You will notify 360 degree in writing within 15 days of the date 360 degree bills you for any Fees that you wish to dispute. Customer shall be solely responsible to verify the accuracy and completeness of invoice details prior to making the payment. Any dispute relating to an invoice must be raised in writing within sixty (60) days from the invoice date.</p>
+      <p>3.4 <strong>Taxes and Communications Surcharges.</strong> All fees are exclusive of any applicable taxes, levies, duties, or other similar exactions imposed by a legal, governmental, or regulatory authority. All fees are also exclusive of any applicable communications service or telecommunication provider fees or surcharges.</p>
+
+      <h3>4. Ownership, Customer Data, and Confidentiality</h3>
+      <p>4.1 <strong>Ownership Rights.</strong> As between the parties, 360 Degree exclusively owns and reserves all rights, titles, and interests in and to the Services, 360 Degree's Confidential Information, and 360 degree Data. As between the parties, you exclusively own and reserve all rights, titles, and interest in and to the Customer Services, your Confidential Information, and Customer Data.</p>
+      <p>4.2 <strong>Customer Data.</strong> You grant 360 degree and its Affiliates the right to access Customer Data as necessary to provide the Services. As 360 degree does not retain, restore, and detain any data, therefore the customer will be solely responsible for its data.</p>
+      <p>4.3 <strong>Confidentiality.</strong> "Confidential Information" means any information or data, regardless of whether it is in tangible form, disclosed by either party that is marked or otherwise designated as confidential or proprietary or that should otherwise be reasonably understood to be confidential given the nature of the information and the circumstances surrounding the disclosure.</p>
+
+      <h3>5. Representations, Warranties, and Disclaimer</h3>
+      <p>5.1 <strong>Power and Authority Representation.</strong> Each party represents and warrants that it has validly accepted or entered into this Agreement and has the legal power to do so.</p>
+      <p>5.2 <strong>Anti-Corruption and International Trade Laws.</strong> Each party warrants that it will comply with all applicable anti-corruption, anti-money laundering, economic and trade sanctions, export controls, and other international trade laws, regulations, and governmental orders.</p>
+      <p>5.3 <strong>Consents and Permissions.</strong> You represent and warrant that you have provided, and will continue to provide, adequate notices, and that you have obtained, and will continue to obtain, the necessary permissions and consents required to enable 360 Degree to perform its obligations.</p>
+      <p>DISCLAIMER. WITHOUT LIMITING A PARTY'S EXPRESS WARRANTIES AND OBLIGATIONS HEREUNDER, THE SERVICES ARE PROVIDED "AS IS," AND NEITHER PARTY MAKES ANY WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE.</p>
+
+      <h3>6. Mutual Indemnification</h3>
+      <p>6.2 <strong>Indemnification by Customer.</strong> You will defend 360 Degree, its Affiliates, and each of their directors, officers, and employees from and against any claim, demand, suit, or proceeding made or brought against a 360 Degree Indemnified Party by a third party alleging or arising out of: (a) your or your End Users' breach of Section 2.2 (Customer Responsibilities) or (b) any Customer Services infringing or misappropriating such third party's intellectual property rights.</p>
+
+      <h3>7. Limitation of Liability</h3>
+      <p>7.1 <strong>LIMITATION ON INDIRECT, CONSEQUENTIAL, AND RELATED DAMAGES.</strong> IN NO EVENT WILL EITHER PARTY OR ITS AFFILIATES HAVE ANY LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT FOR ANY LOST PROFITS, REVENUES, GOODWILL, OR INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, COVER, LOST DATA, BUSINESS INTERRUPTION, OR PUNITIVE DAMAGES.</p>
+      <p>7.2 <strong>LIMITATION OF LIABILITY.</strong> IN NO EVENT SHALL THE TOTAL AGGREGATE LIABILITY OF 360 DEGREE ARISING OUT OF OR RELATED TO THIS AGREEMENT EXCEED THE TOTAL AMOUNT PAID BY CUSTOMER TO 360 DEGREE IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO THE CLAIM.</p>
+
+      <h3>8. Term, Termination, and Survival</h3>
+      <p>8.1 <strong>Agreement Term.</strong> This Agreement will commence on the Effective Date and continue until terminated in accordance with Section 8.2. The term shall automatically renew for successive one (1) year terms unless the Customer provides written notice of cancellation at least thirty (30) days prior to the end of the one year term.</p>
+      <p>8.2 <strong>Termination for Convenience.</strong> Either party may terminate this Agreement for convenience by providing the other party with at least thirty (30) days prior written notice.</p>
+
+      <h3>9. General</h3>
+      <p>9.5 <strong>Notices.</strong> Notices to 360 Degree will be provided via email to <a href="mailto:legal@360degreecloud.com">legal@360degreecloud.com</a>.</p>
+      <p>9.6 <strong>Governing Law.</strong> This Agreement will be governed by and interpreted according to the laws of the applicable state or country identified below without regard to conflicts of laws and principles:</p>
+      <table>
+        <tbody>
+          <tr>
+            <td><strong>If you are domiciled in:</strong></td>
+            <td><strong>Governing law:</strong></td>
+            <td><strong>Courts with personal jurisdiction:</strong></td>
+          </tr>
+          <tr><td>United States of America</td><td>State of California</td><td>State or federal courts of San Francisco, California, USA</td></tr>
+          <tr><td>European Economic Area / UK / Switzerland</td><td>England and Wales</td><td>Courts of London, England, United Kingdom</td></tr>
+          <tr><td>Asia-Pacific region (other than India)</td><td>Singapore</td><td>Courts of Singapore</td></tr>
+          <tr><td>India</td><td>Indian Laws</td><td>Faridabad District Court</td></tr>
+          <tr><td>Canada</td><td>Canadian Laws</td><td>Courts of Canada</td></tr>
+        </tbody>
+      </table>
+      <p>9.8 <strong>Force Majeure.</strong> No failure, delay, or default in the performance of any obligation of a party will constitute an event of default or breach of this Agreement to the extent that such failure arises out of a cause beyond the control and without negligence of such party, including action or inaction of governmental, civil or military authority, fire, flood, terrorist act, war, earthquake, or other natural disasters.</p>
+    </div><!-- /tab20 -->
+
+    <!-- TAB 21: Acceptable Use Policy -->
+    <div id="tab21" class="tab-content">
+      <h2>ACCEPTABLE USE POLICY</h2>
+      <p>This Acceptable Use Policy ("<em>AUP</em>") describes rules that apply to any party ("<em>you</em>", "<em>your</em>", "<em>yours</em>", or "<em>Customer</em>") using any products and services provided by 360 Degree or any of its affiliates ("<em>Services</em>").</p>
+
+      <h3>GENERAL TERMS</h3>
+      <p>I. The Customer agrees to provide timely and complete responses to any requests made by 360 Degree Cloud for documentation, data, or clarification in connection with the Customer's or End Users' use of the Services. Both parties shall maintain compliance with all applicable laws, rules, regulations, and directives issued by relevant governmental or regulatory authorities.</p>
+      <p>II. The Customer further agrees to abide by this AUP, which may be amended by 360 Degree Cloud from time to time upon reasonable notice via email, the Customer's account dashboard, or by posting an updated version on the Company's website.</p>
+      <p>III. The Services may not be used to store, transmit, or facilitate access to content or communications that are illegal, harmful, unwanted, inappropriate, or otherwise objectionable.</p>
+      <p>IV. The Customer shall not use the Services to engage in any activity that is unlawful, deceptive, infringes on the rights of others, or is otherwise damaging to the operations, security, or reputation of 360 Degree Cloud.</p>
+      <p>V. The Customer shall not attempt to bypass, disable, or exploit service limitations, security mechanisms, or filtering tools.</p>
+      <p>VI. The Customer is solely responsible for evaluating whether the Services provide sufficient technical and legal safeguards for the Customer's intended use.</p>
+
+      <h3>Opt-Out Compliance</h3>
+      <p>In the event that any end-user client opts out of receiving messages or calls, it shall be the sole responsibility of the Client to ensure that no further communications are sent to such end-user. The Client must implement and maintain appropriate mechanisms to honor all opt-out requests in a timely and effective manner.</p>
+
+      <h3>INDIA</h3>
+      <p>I. The Customer agrees that all services availed from 360 Degree Cloud shall be used solely for lawful and valid business purposes. The Customer shall not use the services to generate or transmit any calls or SMS messages that violate applicable laws.</p>
+      <p>II. The Customer further agrees that, upon request by 360 Degree Cloud, opt-in proof shall be furnished within forty-eight (48) hours.</p>
+      <p>III. In the event of non-compliance, the Customer shall be liable to bear the penalty as determined at the sole discretion of 360 Degree.</p>
+
+      <h3>COUNTRIES OTHER THAN INDIA</h3>
+      <p>The Customer acknowledges and agrees to comply with all applicable regulations, industry standards, and 360 Degree Cloud's policies regarding the use of messaging services, including but not limited to the 10DLC (10-Digit Long Code) messaging framework.</p>
+      <p>I. Messages sent prior to 10DLC verification: penalty of <strong>$10,000 USD</strong> per violation.</p>
+      <p>II. Evasion of 10DLC messaging rules: penalty of <strong>$1,000 USD</strong> per instance.</p>
+      <p>III. Third and subsequent content violations by the same Content Provider: penalty of <strong>$10,000 USD</strong> per incident.</p>
+    </div><!-- /tab21 -->
+
+    <!-- TAB 2: Intellectual Property Rights -->
+    <div id="tab2" class="tab-content">
+      <h2>INTELLECTUAL PROPERTY RIGHTS</h2>
+      <h3>1. Property Rights</h3>
+      <p>Notwithstanding anything herein to the contrary, Customer acknowledges that 360 Degree Cloud owns the Software and Licensed Property and may own or otherwise control certain generic or proprietary information, inventions, software, strategies, processes, know-how, trade secrets, improvements, other intellectual property and other assets that are owned or controlled by 360 Degree Cloud as of the Effective Date or that are acquired or developed by 360 Degree Cloud after the Effective Date and independently of 360 Degree Cloud's performance of Services under this Agreement.</p>
+      <p>All original works of authorship which are generated by 360 Degree Cloud (solely or jointly with others) within the scope of any Appendix and which are protectable by copyright shall be deemed "works made for hire," as that term is defined in the United States Copyright Act, 17 U.S.C. § 101.</p>
+      <h3>2. Trade Secrets</h3>
+      <p>Customers agree that the Software and all associated trade secrets, including but not limited to the Licensed Property, its configurations, architecture, communications and performance benchmarks, are the exclusive property of 360 Degree Cloud.</p>
+      <h3>3. Provision of Licensed Property</h3>
+      <p>Subject to the observance by Customer of the terms and conditions of this Agreement, 360 Degree Cloud hereby grants to Customer and its Affiliates a perpetual, non-exclusive, non-transferable license to use the Licensed Property solely for Customer and its Affiliates' business purposes.</p>
+      <p>The availability of the Licensed Property is ninety-nine percent (99%) per calendar year ("Availability"), excluding scheduled updating and scheduled maintenance work.</p>
+    </div><!-- /tab2 -->
+
+    <!-- TAB 7: Security Overview -->
+    <div id="tab7" class="tab-content">
+      <h2>SECURITY OVERVIEW</h2>
+      <p>This Security Overview is incorporated into and made a part of the agreement between 360 degree and Customer covering Customer's use of the Services.</p>
+      <h3>1. Definitions</h3>
+      <p>"Customer Data" means any data (a) provided by Customer, or any user of the Services, to 360 Degree in connection with Customer's use of the Services or (b) generated for Customer's use as part of the Services.</p>
+      <h3>2. Purpose</h3>
+      <p>This Security Overview describes 360 DEGREE's security program, including 360 Degree's security certifications and self-attestations and technical and organizational security controls to protect in accordance with industry best practices.</p>
+      <h3>3. People Security and Onboarding</h3>
+      <p>360 DEGREE maintains comprehensive policies, procedures, and controls that are regularly updated to align with industry best practices. All 360 degree employees are subject to minimum security measures including background checks, confidentiality agreements, annual security training, and controlled access to Customer Data.</p>
+      <h3>4. Physical Security</h3>
+      <p>360 degree maintains strong physical security controls at its offices, guided by a physical security policy that is regularly reviewed, covering access controls, employee and contractor badge requirements, securing IT equipment, and after-hours monitoring.</p>
+      <h3>5. Third Party Vendor Management</h3>
+      <p>360 DEGREE may use third party vendors to provide the Services. 360 degree has implemented a comprehensive vendor management program that applies appropriate technical and organizational security controls proportional to the type of service the third-party vendor is providing.</p>
+      <h3>7. Access Controls</h3>
+      <p>360 degree follows the principles of least privilege through a team-based access control mechanism. Access rights to the production environment that are not time-based are reviewed at least quarterly. Multi-factor authentication is required for all authorized users.</p>
+      <h3>8. Vulnerability Management</h3>
+      <p>360 DEGREE uses third-party tooling to conduct vulnerability scans regularly. Critical software patches are evaluated, tested, and applied proactively.</p>
+      <h3>9. Penetration Testing</h3>
+      <p>360 DEGREE performs penetration tests and engages independent, recognized third parties to conduct application-level penetration tests. 360 DEGREE also maintains a Bug Bounty Program through Bug Crowd.</p>
+      <h3>10. Security Incident Management</h3>
+      <p>360 DEGREE maintains security incident management policies and procedures in accordance with NIST SP 800-61. 360 DEGREE retains security logs for one hundred and eighty (180) days.</p>
+      <h3>11. Resilience and Service Continuity</h3>
+      <p>360 Degree utilizes multiple geographically diverse regions within its infrastructure providers and has configured multiple fault-independent availability zones within each of those regions.</p>
+    </div><!-- /tab7 -->
+
+    <!-- TAB 22: Data Protection Addendum -->
+    <div id="tab22" class="tab-content">
+      <h2>DATA PROTECTION ADDENDUM</h2>
+      <h2>HOW 360 DEGREE CLOUD IS PREPARING TO PROTECT YOUR DATA</h2>
+      <p>At 360 Degree Cloud, customer trust is our top priority. We deliver services to hundreds of active customers, including small and medium enterprises in India and abroad.</p>
+      <p>This Policy establishes the 360 Degree Cloud group's approach to compliance with applicable data protection laws when processing Personal Data <strong>solely as a Data Processor on behalf of its customers</strong>.</p>
+      <h3>Key Definitions</h3>
+      <p><strong>"Controller"</strong> — the natural or legal person which, alone or jointly with others, determines the purposes and means of the Processing of Personal Data.</p>
+      <p><strong>"Data Subject"</strong> — the individual to whom Personal Data relates.</p>
+      <p><strong>"Personal Data"</strong> — any information relating to an identified or identifiable individual where such information is contained within Customer Data and is protected as personal data under applicable Data Protection Law.</p>
+      <p><strong>"Personal Data Breach"</strong> — a breach of security leading to accidental or unlawful destruction, loss, alteration, unauthorized disclosure of, or access to, Personal Data.</p>
+      <h3>Three Core Parts of Our Communication Platform</h3>
+      <h4>1. Customer Consent</h4>
+      <p>Ensuring clear and specific consent for data collection and processing. Rights granted to every client include: right to be informed, right to access, right to rectify, right to erasure, right to restrict processing, right to data portability, right to object, and rights regarding automated decision making.</p>
+      <h4>2. Data Minimization</h4>
+      <p>360 Degree Cloud processes Personal Data strictly on a transient basis and does not persistently retain Customer Content or End-User Personal Data. Data minimisation controls are implemented by Customers within their own environments.</p>
+      <h4>3. Information Security</h4>
+      <p>Access logs are maintained for operations carried out on the personal data of every client. We conduct regular vulnerability tests and annual penetration testing. We use pseudonymization through encryption and hashing to protect all personal data.</p>
+      <p><strong>Data Protection Officers (DPO):</strong> Mr. Rajeev Khare and Prateek Narayan.</p>
+      <h3>Complaint Handling</h3>
+      <p>Enable individuals to raise data protection complaints and concerns via email at <a href="mailto:legal@360degreecloud.com">legal@360degreecloud.com</a>. 360 Degree Cloud will acknowledge receipt within fifteen (15) working days and make a substantive response within one (1) month.</p>
+      <h3>Changes to Our Policy</h3>
+      <p>If we decide to change our policy, we will post those changes on this page. Privacy Policy: <a href="https://360smsapp.com/privacy-policy/" target="_blank">https://360smsapp.com/privacy-policy/</a></p>
+      <p><strong>Disclaimer:</strong> None of the content above is legal advice. Please seek legal counsel for specific recommendations related to compliance.</p>
+    </div><!-- /tab22 -->
+
+    <!-- TAB 1: AI Agent -->
+    <div id="tab1" class="tab-content">
+      <h2>AI AGENT SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", Client or "You") for the provision of AI Agent Service, as outlined below. By using our AI Agent service, the Customer agrees to the terms and conditions outlined in this Agreement.</p>
+      <h3>1. Definition</h3>
+      <p>"AI Agent" refers to the artificial intelligence-based system provided by 360 Degree Cloud designed to assist with customer interactions, data processing, automated responses, virtual assistance, and other AI-driven services. "Natural Language Processing (NLP) technology" is a field of artificial intelligence that enables computers to understand, interpret, and generate human language.</p>
+      <h3>2. Scope of Services</h3>
+      <p>2.1 360 Degree Cloud AI Agent shall enable automated interactions with end users through voice and chat-based interfaces. 2.2 The AI Agent will leverage NLP technology to interpret and respond to customer inquiries in a conversational manner. 2.3 The Customer may configure the AI Agent's behaviors, responses, and personality to align with business needs.</p>
+      <h3>3. Customer Responsibility</h3>
+      <p>3.1 Customers are responsible for any text, images, or other content you upload or submit to the AI ("Input") as well as the text, images, or other content generated by the AI Agent based on your Input ("Output").</p>
+      <p><strong>3.2 AI Features.</strong> The Services may include or integrate third-party artificial intelligence ("AI") features or models (including but not limited to OpenAI's ChatGPT or similar generative AI technologies) to provide text generation, predictive, analytical, or other automated functionalities ("AI Features").</p>
+      <p><strong>3.2.1 Nature of AI Outputs.</strong> The Client acknowledges and agrees that the AI Features generate responses based on algorithmic and probabilistic patterns derived from training data and user inputs. Such AI-generated content ("AI Output") may contain factual inaccuracies, omissions, or inappropriate information. The AI Output is not guaranteed to be accurate, complete, or free of error.</p>
+      <p><strong>3.2.2 Client Responsibility.</strong> The Client shall be solely responsible for reviewing and independently verifying all AI Outputs before relying upon or using them; ensuring that the AI Output is appropriate and compliant with applicable laws and regulations.</p>
+      <p><strong>3.2.3 Disclaimer of Liability.</strong> The Company makes no representations or warranties regarding the accuracy, reliability, or suitability of any AI Output. The AI Features are provided "as is" and "as available".</p>
+      <p><strong>3.2.4 Third-Party Technology.</strong> Where the AI features are provided by third-party providers (such as OpenAI), such features shall also be governed by the respective provider's terms of use and privacy policy.</p>
+      <p><strong>3.3</strong> The Customer shall ensure that any content used within the AI Agent's interactions is lawful, does not infringe on third-party intellectual property rights, and is not defamatory, offensive, or in violation of any laws.</p>
+      <p><strong>3.4</strong> The Customer is solely responsible for obtaining all necessary consents from individuals whose data is processed by the AI Agent.</p>
+      <p><strong>3.5 AI Usage &amp; Pricing Terms.</strong> Client acknowledges and agrees that pricing for AI-powered services is variable, consumption-based, and dependent upon evolving third-party provider pricing structures. All invoices issued by 360 Degree Cloud shall be deemed accurate, valid, and accepted unless disputed by Client in writing within seven (7) days of the applicable invoice date.</p>
+    </div><!-- /tab1 -->
+
+    <!-- TAB 4: Ringless Voicemail -->
+    <div id="tab4" class="tab-content">
+      <h2>RINGLESS VOICEMAIL SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", Client or "You") for the provision of RVM Service, as outlined below.</p>
+      <h3>1. Definitions</h3>
+      <p>"RVM Services" refers to the Recorded Voice Messaging service provided by 360 Degree Cloud, which allows for the delivery of pre-recorded voice messages to a list of recipients through automated systems.</p>
+      <p>"Salesforce Platform" refers to the third-party platform on which the Company's application runs. 360 Degree Cloud does not own, control, or operate the Salesforce Platform.</p>
+      <h3>2. Scope of Services</h3>
+      <p>2.1 The RVM Services are designed to integrate with Salesforce CRM and other CRM systems. 2.2 The ability to deliver pre-recorded voice messages to multiple recipients via automated systems. 2.3 The ability to create, configure, and execute customizable voice messaging campaigns. 2.4 The ability to personalize voice messages by incorporating recipient-specific data.</p>
+      <h3>3. Customer Responsibilities</h3>
+      <p>3.1 The Customer agrees to comply with all applicable laws and regulations, including the Telephone Consumer Protection Act (TCPA), the National Do Not Call Registry (NDNC), and any other local, state, and national regulations governing the use of automated voice messaging systems.</p>
+      <p>3.2 The Customer is responsible for obtaining and maintaining proper consent from recipients prior to initiating any recorded or automated calls.</p>
+      <h3>4. Prohibitions</h3>
+      <p>4.1 The Customer agrees not to use the RVM Services for any unlawful, fraudulent, or malicious activity. 4.2 The customer shall not use the Services in a manner that could damage, disrupt, or interfere with the functionality or security of the Services. 4.3 The customer agrees not to use the Services to deliver unsolicited or unauthorized communications.</p>
+    </div><!-- /tab4 -->
+
+    <!-- TAB 5: CTI -->
+    <div id="tab5" class="tab-content">
+      <h2>CTI SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", "Client" or "You") for the provision of CTI Services, as outlined below.</p>
+      <h3>1. Definition</h3>
+      <p>Computer Telephony Integration (CTI) is a technology that integrates telecommunication services with computer systems and software applications, allowing users to manage calls and customer interactions directly from their Salesforce environment.</p>
+      <h3>2. Service Provided</h3>
+      <p>The 360 Degree Cloud offers a CTI solution integrating telephony systems with CRM software. Services include: integration of telephone systems with CRM platforms, automated call management features, real-time reporting and analytics, customizable call routing, and ongoing maintenance and support.</p>
+      <h3>SMS App CTI Credit Usage Terms</h3>
+      <p><strong>No Expiration &amp; Service Conditions:</strong> Purchased credits do not expire and may be used at your convenience. No refunds will be issued for unused credits.</p>
+      <p><strong>Dispute Resolution:</strong> You must notify 360 Degree Cloud in writing within 45 days of the billing date for any fee/rate dispute.</p>
+      <p><strong>Credit Deduction Policy:</strong> 1 call credit per call up to 60 seconds. Special rates apply for service usage outside the specified country.</p>
+      <h3>Security &amp; Liability Disclaimer</h3>
+      <p>You are solely responsible for securing your systems. 360 Degree Cloud does not access or store your data. We are not responsible for any security breaches or associated costs/fraudulent activities in your systems.</p>
+    </div><!-- /tab5 -->
+
+    <!-- TAB 6: Local Timezone Finder -->
+    <div id="tab6" class="tab-content">
+      <h2>LOCAL TIMEZONE FINDER SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement ("SLA") is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer," "Client," or "You") for the provision of Local Timezone Finder service as outlined below.</p>
+      <h3>1. Definitions</h3>
+      <p>"Local Time Zone Finder Service" is a tool or software solution integrated in Salesforce, designed to assist businesses in optimizing their scheduling, communication, and outreach by identifying and aligning with the local time zones of their customers, clients, or team members.</p>
+      <h3>2. Scope of Services</h3>
+      <p>2.1 360 Degree Cloud agrees to provide the Local Timezone Finder Service, enabling businesses to optimize their scheduling, outreach, and communication efforts by leveraging time zone-based scheduling.</p>
+      <p>2.2 The service is designed to help businesses build a positive brand image by respecting and accommodating customers' non-working hours.</p>
+      <p>2.3 The service provides alignment of outreach activities with the recipient's local time, maximizing the effectiveness of communications.</p>
+      <h3>3. Customer Responsibilities</h3>
+      <p>3.1 Customer agrees to provide accurate, complete, and up-to-date time zone information for the contacts you wish to schedule communications with.</p>
+      <p>3.2 Customer shall not use the Service for unlawful purposes and shall use the Service in accordance with applicable local laws, regulations, and industry standards.</p>
+    </div><!-- /tab6 -->
+
+    <!-- TAB 8: Email Sync -->
+    <div id="tab8" class="tab-content">
+      <h2>EMAIL SYNC SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", Client or "You") for the provision of Email Sync Services, as outlined below.</p>
+      <h3>1. Definition</h3>
+      <p>"Email Sync" is a service provided by 360 Degree that integrates with platforms like Salesforce, allowing for automatic synchronization of emails, tasks, and calendars, creating a comprehensive view of customer interactions.</p>
+      <h3>2. Account Registration and Security</h3>
+      <p>Customers are responsible for maintaining the confidentiality of their account credentials and agree to notify us immediately if they suspect any unauthorized use of their account.</p>
+      <h3>3. Customer's Responsibilities</h3>
+      <p>3.1 Customer agrees to use the services in a manner provided by the applicable law and as per the terms of the service.</p>
+      <p>3.2 Customer agrees not to use the Service for illegal, fraudulent, or harmful purposes, including spamming or sending unsolicited emails.</p>
+      <h3>4. Third Party</h3>
+      <p>The Email Sync Service may interact with third-party email providers (e.g., Gmail, Outlook). 360 Degree is not responsible for the functionality, availability, or security of third-party services.</p>
+      <h3>5. Maintenance</h3>
+      <p>While 360 degree strives to provide uninterrupted access to the Email Sync Service, the Service may be temporarily unavailable due to maintenance, technical issues, or other operational reasons.</p>
+    </div><!-- /tab8 -->
+
+    <!-- TAB 9: Email Unsubscribe/Opt-Out -->
+    <div id="tab9" class="tab-content">
+      <h2>EMAIL UNSUBSCRIBE/OPT-OUT SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", Client or "You") for the provision of Email Unsubscribe/Opt Out service, as outlined below.</p>
+      <h3>1. Definition</h3>
+      <p>"Email Unsubscribe/Opt-Out Service" refers to the integrated solution within Salesforce that enables efficient management, tracking, and processing of unsubscribe or opt-out requests from recipients of email communications, ensuring compliance with relevant laws such as CAN-SPAM Act, GDPR, and other email marketing standards.</p>
+      <h3>2. Scope of Service</h3>
+      <p>2.1 The Service provides an easy, single-click option for recipients to opt-out from email communications.</p>
+      <p>2.2 Customers can personalize the unsubscribe page with your brand's logo, colors, and design elements.</p>
+      <p>2.3 The Service allows the customer to capture reasons why recipients opt out of your email campaigns.</p>
+      <p>2.4 The Service includes an analytical dashboard where the Customer can monitor unsubscribe rates and gain insights to refine future email campaigns.</p>
+      <h3>3. Customer Responsibilities</h3>
+      <p>3.1 Customer shall ensure that all information provided in connection with the Service is accurate, current, and complete.</p>
+      <p>3.2 Customers agree to use the Service in compliance with all applicable laws, including data protection and privacy laws.</p>
+      <p>3.3 Customer will use the Service only to process legitimate opt-out requests and will not use the Service for any illegal or unethical purposes.</p>
+    </div><!-- /tab9 -->
+
+    <!-- TAB 10: WhatSync -->
+    <div id="tab10" class="tab-content">
+      <h2>WHATSSYNC SERVICE LEVEL AGREEMENT</h2>
+      <div class="sla-text" lang="en-GB">
+        <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", Client or "You") for the provision of WhatsApp Personal Sync Services, as outlined below.</p>
+        <h3>1. Definition</h3>
+        <p><strong>"WhatsApp Personal Sync Service"</strong> enables users to synchronize and integrate conversations, media files, and data from their standard individual WhatsApp accounts with external systems like CRM platforms (particularly Salesforce) or across multiple devices.</p>
+        <p>Do not send or trigger any test messages after connecting the WhatsApp number via WhatSync. WhatsApp may identify such behaviour as system-generated or abnormal, which can lead to number restriction or permanent blocking.</p>
+        <p><strong>Allowed:</strong> Only genuine, customer-initiated, or legitimate business conversations.</p>
+        <h3>2. Scope of Service</h3>
+        <p>2.1 Configuration of WhatsApp accounts within the Salesforce environment.</p>
+        <p>2.2 The 360 Degree will charge a one-time setup fee for the integration services.</p>
+        <p>2.3 Any services beyond the initial setup will be considered additional services, charged separately.</p>
+        <p>2.4 The 360 degree's responsibilities do not include support or maintenance of the WhatsApp and Meta services post-integration unless separately agreed upon.</p>
+        <h3>3. Service Availability</h3>
+        <p>3.1 We commit to providing 99% uptime for the WhatsApp Business services, subject to third-party services and excluding planned maintenance.</p>
+        <p>3.2 Scheduled maintenance will be communicated to the Client at least 48 hours in advance.</p>
+        <p>3.3 In case of service downtime caused by Meta, 360 Degree shall have no liability for recovery.</p>
+        <h3>4. Customer Responsibilities</h3>
+        <p>4.5 <strong>WhatSync is Strictly: No Promotional or Marketing Messages.</strong> WhatSync must not be used for promotions, campaigns, offers, discounts, marketing or bulk outreach. Sending promotional or marketing content through WhatSync is a major policy violation and may result in immediate WhatsApp number suspension.</p>
+        <p>4.7 <strong>No Automation or Bulk Messaging:</strong> WhatSync should not be connected to automated workflows that trigger messages without manual control.</p>
+        <h3>5. WhatsSync Compliance</h3>
+        <p>5.1 Our Service is not affiliated with, authorized by, endorsed by, or in any way officially connected with WhatsApp Inc. or any of its subsidiaries or affiliates.</p>
+        <p>5.2 The use of our Service must comply with WhatsApp's Terms of Service.</p>
+        <p>5.4 If an end customer blocks the WhatsApp number or reports the conversation, WhatsApp may restrict the number, temporarily suspend access, or permanently ban the number.</p>
+        <h4><strong>Unavoidable Legal Stuff</strong></h4>
+        <p>THE SERVICE AND ANY OTHER SERVICE AND CONTENT INCLUDED ON OR OTHERWISE MADE AVAILABLE TO YOU THROUGH THE SERVICE ARE PROVIDED TO YOU ON AN AS IS OR AS AVAILABLE BASIS WITHOUT ANY REPRESENTATIONS OR WARRANTIES OF ANY KIND. IN NO EVENT WILL 360 Degree Cloud/SMS APP BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY SPECIAL, INDIRECT, INCIDENTAL, EXEMPLARY OR CONSEQUENTIAL DAMAGES OF ANY KIND ARISING OUT OF OR IN CONNECTION WITH THE SERVICE. OUR TOTAL LIABILITY FOR ALL CAUSES OF ACTION AND UNDER ALL THEORIES OF LIABILITY WILL BE LIMITED TO THE AMOUNT YOU PAID TO 360 Degree Cloud.</p>
+      </div>
+    </div><!-- /tab10 -->
+
+    <!-- TAB 12: Highlighter -->
+    <div id="tab12" class="tab-content">
+      <h2>HIGHLIGHTER SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement ("SLA") is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer," "Client," or "You") for the provision of Highlighter services, as outlined below.</p>
+      <h3>1. Definitions</h3>
+      <p>"360 Highlighter Service" refers to a specialized Salesforce-integrated solution that enables highlighting, annotation, and tagging of key information within Salesforce records, thereby enhancing visibility, efficiency, and usability of critical data.</p>
+      <h3>2. Scope of Service</h3>
+      <p>2.1 360 Degree Cloud agrees to provide the Customer with access to the 360 Highlighter Service, designed to assist the Customer in enhancing visibility and managing critical information within Salesforce records through the use of highlighting, annotations, and tagging.</p>
+      <p>2.2 The Service provides real-time highlighting and annotations, enabling the Customer to view and interact with changes as they occur within the Salesforce system.</p>
+      <h3>3. Service Availability</h3>
+      <p>360 Degree Cloud will use commercially reasonable efforts to ensure the 360 Highlighter Service meets Target Availability, excluding the exclusions defined below.</p>
+      <h3>4. Exclusions</h3>
+      <p>Target Availability does not apply during periods of unavailability caused by: (4.1) unauthorized use; (4.2) general internet problems, force majeure events, denial of service attacks or third-party service outages; (4.3) issues related to the Customer's equipment, software, or network; (4.4) scheduled or emergency maintenance; (4.5) versions that are no longer supported.</p>
+      <h3>5. Customer Responsibilities</h3>
+      <p>5.1 The Customer understands and agrees that any annotations, highlights, or tags applied using this Service are permanent actions and may not be reversible.</p>
+      <p>5.2 The Customer is responsible for ensuring the data uploaded to or integrated with the 360 Highlighter Service is accurate, complete, and legally authorized for use.</p>
+    </div><!-- /tab12 -->
+
+    <!-- TAB 13: SMS Service -->
+    <div id="tab13" class="tab-content">
+      <h2>SMS SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", "Client" or "You") for the provision of SMS Services, as outlined below.</p>
+      <h3>1. Definition</h3>
+      <p>"SMS Messaging Service" means the service for transforming, formatting and delivering an SMS Message from the Gateway to the relevant mobile GSM network.</p>
+      <p>"Credits" means the currency the customer needs to purchase to send messages.</p>
+      <h3>2. SMS Services</h3>
+      <p>2.1 SMS service enables integration with CRM data and enables users to send messages from the CRM to the user's contacts, leads, accounts and other object records.</p>
+      <p>2.2 360 Degree Cloud shall make all reasonable endeavours to ensure uninterrupted and continued use of the SMS Services; however, delivery of messages is largely dependent on the effective functioning of Network Operators' communications networks.</p>
+      <h3>3. Payment and Usage of Credit Terms</h3>
+      <p><strong>Credit Validity &amp; Usage:</strong> Purchased credits do not expire. All purchases shall be final, and no refunds will be issued for unused credits.</p>
+      <p><strong>Late Payment Charges:</strong> Delayed payments shall accrue interest at the rate of one per cent (1%) per month, compounded half-yearly.</p>
+      <p><strong>Dispute Resolution:</strong> Any dispute relating to billing must be communicated in writing within forty-five (45) days from the date of the invoice.</p>
+      <p><strong>Credit Deduction Policy:</strong> 1 SMS credit per SMS up to 160 English characters (1 segment). Unicode (non-English) messages: 70 characters per credit. Messages over 160 characters are treated as long messages, with 1 credit deducted for every 153 characters.</p>
+      <p>360 Degree Cloud shall levy a <strong>10% administrative markup on all carrier charges</strong> as an admin fee for reporting and operational support.</p>
+      <h3>Security &amp; Liability Disclaimer</h3>
+      <p>You are solely responsible for securing your systems. 360 Degree Cloud does not access or store your data. We are not responsible for any security breaches or associated costs/fraudulent activities in your systems.</p>
+    </div><!-- /tab13 -->
+
+    <!-- TAB 14: LINE -->
+    <div id="tab14" class="tab-content">
+      <h2>LINE SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement ("SLA") is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer," "Client," or "You") for the provision of 360 Line Japan services, as outlined below.</p>
+      <h3>1. Definitions</h3>
+      <p>"360 Line Japan Service" refers to a comprehensive cloud-based solution enabling businesses to integrate and manage their LINE communications efficiently within the Salesforce environment, specifically designed for the Japanese market.</p>
+      <h3>2. Scope of Services</h3>
+      <p>2.1 360 degree will integrate the Salesforce Application with the Customer's Salesforce instance, enabling seamless communication through the LINE platform.</p>
+      <p>2.2 360 degree shall customise the Salesforce Application to meet specific business needs, including branding, messaging, and automated workflows.</p>
+      <p>2.3 360 degree shall provide ongoing technical support including troubleshooting, upgrades, and enhancements.</p>
+      <p>2.4 360 Degree will provide training materials and sessions to ensure the Customer's team is proficient in using the Salesforce Application effectively.</p>
+      <h3>3. Exclusions</h3>
+      <p>Target Availability excludes unavailability caused by: (1) Customer's unauthorized use; (2) general Internet problems, force majeure events; (3) Customer's equipment, software, or network; (4) Scheduled or emergency maintenance.</p>
+      <h3>4. Scheduled Maintenance</h3>
+      <p>360 Degree will use commercially reasonable efforts to notify the Customer at least five (5) business days prior to beginning scheduled maintenance via email.</p>
+    </div><!-- /tab14 -->
+
+    <!-- TAB 15: Smart Docs -->
+    <div id="tab15" class="tab-content">
+      <h2>SMART DOCS SERVICE LEVEL AGREEMENT</h2>
+      <div class="smart-doc-terms">
+        <p><strong>ACCEPTANCE:</strong> By installing, activating, or using any product in the SMART DOC suite — including the Smart Doc Tool Salesforce package, MS Word Extension, or File Sync add-on — you confirm that you have read and agree to be legally bound by these Terms.</p>
+        <p><strong>IMPORTANT — PLEASE READ CAREFULLY:</strong> These Terms govern all products under the SMART DOC suite. BY USING THE SERVICE IN ANY MANNER, YOU CONFIRM THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE LEGALLY BOUND BY THESE TERMS.</p>
+        <p><strong>PART A — SMART DOC TOOL</strong></p>
+        <p><strong>1. About Smart Doc Tool.</strong> Smart Doc Tool is a document generation platform developed and distributed by 360 Degree Cloud Technologies ("360DCT"). It runs natively within your Salesforce environment and integrates with Microsoft Office via a companion extension.</p>
+        <p><strong>2. Setup &amp; Usage Workflow.</strong> Smart Doc Tool requires setup steps that are entirely the Customer's responsibility: installing the managed package, installing the MS Word Extension, completing Salesforce configuration, creating document templates, and triggering document generation.</p>
+        <p><strong>3. License Grant.</strong> 360DCT grants you a non-exclusive, non-transferable, non-sublicensable, limited license to install and use Smart Doc Tool solely within your own licensed Salesforce organisation. The Software is licensed, not sold.</p>
+        <p><strong>5. Email Delivery &amp; Document Output.</strong> All document content is derived from your Salesforce data and templates. 360DCT is not responsible for errors resulting from incorrect data, misconfigured merge tags, or template design errors. 360DCT does not retain copies of generated documents.</p>
+        <p><strong>PART B — FILE SYNC ADD-ON</strong></p>
+        <p><strong>6. About File Sync.</strong> File Sync is an add-on feature that enables users to efficiently manage and access files by syncing them between the Salesforce Platform and external cloud storage platforms such as Google Drive, Microsoft SharePoint, and other supported services.</p>
+        <p><strong>8. File Sync — User Responsibilities.</strong> By using File Sync, you agree NOT to upload, sync, or share files that violate third-party rights; use File Sync for illegal, fraudulent, or malicious purposes; upload files containing viruses, malware, ransomware, trojans, or any harmful code; or sync files containing sensitive personal data without ensuring full compliance with applicable privacy laws.</p>
+        <p><strong>9. File Permissions, Ownership &amp; Data Handling.</strong> 360DCT does NOT claim ownership of any files you sync. You retain full ownership of all Synced Files at all times. 360DCT does NOT store, retain, or detain your data on its own servers.</p>
+        <p><strong>PART C — SHARED TERMS</strong></p>
+        <p><strong>11. Restricted Uses &amp; Prohibited Conduct.</strong> Do not decompile, disassemble, reverse engineer, or attempt to derive source code from Smart Doc Tool, the MS Word Extension, or File Sync. Do not redistribute, resell, sublicense, rent, lease, or transfer either product without 360DCT's prior written consent.</p>
+        <p><strong>12. Data Privacy &amp; Security.</strong> 360DCT acts as a data processor in relation to all Customer Data processed through Smart Doc Tool and File Sync. You remain the data controller at all times.</p>
+      </div>
+    </div><!-- /tab15 -->
+
+    <!-- TAB 16: WhatsApp Business -->
+    <div id="tab16" class="tab-content">
+      <h2>WHATSAPP BUSINESS SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Client" or "You") for the provision of WhatsApp Business Services, as outlined below.</p>
+      <h3>1. Definition</h3>
+      <p>"WhatsApp Business Service" — 360 degree shall provide a tool or platform that enables businesses to engage with customers through messaging on a large scale.</p>
+      <h3>2. Scope of Service</h3>
+      <p>2.1 Configuration of WhatsApp accounts within the Salesforce environment.</p>
+      <p>2.2 One-time setup fee for integration services, determined based on complexity and specific requirements as agreed in the order form.</p>
+      <p>2.3 Any services beyond the initial setup will be considered additional services, charged separately.</p>
+      <p>2.4 360 degree's responsibilities do not include support or maintenance of WhatsApp and Meta services post-integration.</p>
+      <h3>3. Service Availability</h3>
+      <p>3.1 We commit to providing 99% uptime, subject to third-party services. 3.2 Scheduled maintenance communicated at least 48 hours in advance. 3.3 Downtime caused by Meta: 360 Degree shall have no liability for recovery. 3.4 Late payment may result in service suspension.</p>
+      <h3>4. Customer Responsibilities</h3>
+      <p>4.1 Customer shall always be responsible for the creation of the content and creatives of the WhatsApp messages.</p>
+      <p>4.3 Customer shall obtain prior permission from its end recipients and keep a record of their valid opt-in proofs before sending WhatsApp messages.</p>
+      <h3>5. WhatsApp Compliance</h3>
+      <p>5.1 Our Service is not affiliated with, authorized by, endorsed by, or in any way officially connected with WhatsApp Inc. or any of its subsidiaries or affiliates.</p>
+      <p>5.2 The use of our Service must comply with WhatsApp's Terms of Service.</p>
+    </div><!-- /tab16 -->
+
+    <!-- TAB 17: Mass Email -->
+    <div id="tab17" class="tab-content">
+      <h2>MASS EMAIL SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", Client or "You") for the provision of Mass Mail Services, as outlined below.</p>
+      <h3>1. Definition</h3>
+      <p>"360 Degree Mass Mailer" is a comprehensive tool designed to facilitate the sending of bulk emails to large audiences efficiently and securely. This service is built specifically for Salesforce users, offering seamless integration and a host of advanced features including streamlined email marketing, automation, Salesforce integration, email personalization, email tracking, and email reputation management.</p>
+      <h3>2. License</h3>
+      <p>Subject to these Terms, the 360 Degree Cloud grants Customer a non-exclusive, non-transferable, revocable license to access and use the Service for its intended purpose, solely for your business or personal use.</p>
+      <h3>3. Use of the Service</h3>
+      <p>Customer agree to use the Service in compliance with all applicable laws and regulations. Customer shall not violate the rights of any third party, including intellectual property rights or privacy rights; use the Service for any unlawful purpose, including spamming or sending unsolicited emails; or engage in activities that could harm or interfere with the operation of the Service or its infrastructure.</p>
+      <h3>4. Customer Responsibility</h3>
+      <p>As a Customer of 360 Mass Mailer, Customers are responsible for the content, management, and distribution of any email campaigns you create using the Service. Customers agree to ensure that all email campaigns comply with applicable laws, including the CAN-SPAM Act, GDPR, and other email marketing regulations.</p>
+      <h3>5. Automated Emails</h3>
+      <p>If the Customer chooses to use automated features, the Customer must ensure that all automated campaigns honor opt-out requests. If a recipient unsubscribes from one email within a series, they should be automatically unsubscribed from all future marketing communications.</p>
+    </div><!-- /tab17 -->
+
+    <!-- TAB 18: Merge Duplicates -->
+    <div id="tab18" class="tab-content">
+      <h2>MERGE DUPLICATES SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement ("SLA") is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer," "Client," or "You") for the provision of Merge Duplicates services, as outlined below.</p>
+      <h3>1. Definitions</h3>
+      <p>"Merge Duplicates Service" refers to a specialized cloud-based solution designed for identifying, managing, and merging duplicate records within the Salesforce environment to maintain data integrity and accuracy.</p>
+      <h3>2. Scope of Service</h3>
+      <p>2.1 360 Degree agrees to provide the Customer with access to the Merge Duplicate Service, which is designed to assist the Customer in identifying, filtering, and merging duplicate records within Salesforce.</p>
+      <p>2.3 The Service will provide real-time deduplication, allowing duplicate records to be identified and merged as they are entered into the Salesforce system.</p>
+      <h3>3. Service Availability</h3>
+      <p>360 Degree Cloud will use commercially reasonable efforts to ensure the Merge Duplicate Service meets Target Availability, excluding the exclusions defined below.</p>
+      <h3>5. Customer Responsibility</h3>
+      <p>5.2 The Customer understands and agrees that any merges performed using this functionality are permanent actions and may not be reversible.</p>
+      <p>5.3 The Customer shall ensure that backups of all relevant data are performed before utilizing the auto-merge functionality to avoid unintentional data loss.</p>
+      <h3>6. Scheduled Maintenance</h3>
+      <p>360 Degree Cloud will use commercially reasonable efforts to notify the Customer at least five (5) business days prior to beginning scheduled maintenance via email. Scheduled maintenance will be conducted, to the extent practicable, during weekend hours to minimize disruption.</p>
+    </div><!-- /tab18 -->
+
+    <!-- TAB 19: VTM & VTP -->
+    <div id="tab19" class="tab-content">
+      <h2>VTM &amp; VTP SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement ("SLA") is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", "Client" or "You") for the provision of Virtual Telephony Manager (VTM) and Virtual Telephony Platform (VTP) services, as outlined below.</p>
+      <h3>1. Definitions</h3>
+      <p>"Verify The Mail (VTM)" refers to a comprehensive cloud-based telephony management solution integrated within Salesforce to validate and confirm the authenticity of email addresses.</p>
+      <p>"Verify The Phone (VTP)" is a feature that ensures the accuracy of phone numbers directly within Salesforce. It validates numbers in real-time at the point of entry, supporting both bulk and manual verification.</p>
+      <h3>2. Scope of Services</h3>
+      <p>360 Degree Cloud shall provide configuration and integration of telephony systems within Salesforce, implementation of automated call management systems, provision of real-time analytics, and ongoing maintenance and support.</p>
+      <h3>3. Service Availability</h3>
+      <p>3.1 We commit to providing maximum uptime for the VTM &amp; VTP services, excluding planned maintenance. 3.2 Scheduled maintenance communicated at least 48 hours in advance. 3.3 360 Degree Cloud shall have no liability for service downtime caused by system failure or network issues beyond its direct control.</p>
+      <h3>4. Customer Responsibilities</h3>
+      <p>4.1 The Customer shall maintain the confidentiality of all account credentials.</p>
+      <p>4.2 The Customer shall use the services in full compliance with all applicable local, state, national, and international laws, regulations, and industry standards.</p>
+      <p>4.3 The Customer shall obtain and maintain the necessary consents and permissions from all recipients before initiating any recorded or automated calls.</p>
+    </div><!-- /tab19 -->
+
+    <!-- TAB 23: Textolic -->
+    <div id="tab23" class="tab-content">
+      <h2>TEXTOLIC SERVICE LEVEL AGREEMENT</h2>
+      <p>This Service Level Agreement (SLA) is made between 360 Degree Cloud ("Provider," "We," or "Us") and ("Customer", "Client" or "You") for the provision of Textolic Services, as outlined below.</p>
+      <h3>1. Definition</h3>
+      <p>"Textolic service" is a comprehensive communication solution that enhances customer engagement within Salesforce. This application directly integrates SMS, WhatsApp, and other messaging platforms into Salesforce, enabling businesses to manage communications efficiently.</p>
+      <p>"Salesforce Platform" refers to the third-party platform on which the Company's application runs. 360 Degree Cloud does not own, control, or operate the Salesforce Platform.</p>
+      <h3>2. Account Registration and Usage</h3>
+      <p>2.1 Customers are responsible for maintaining the confidentiality of their account credentials.</p>
+      <p>2.2 Customer agree to use the service in compliance with applicable laws and regulations.</p>
+      <h3>3. Message Limits and Delivery</h3>
+      <p>3.1 The service may have limits on the number of messages that can be sent or received, depending on the plan selected.</p>
+      <p>3.2 Textolic makes no guarantees regarding the delivery of messages, as factors beyond our control (e.g., network issues, carrier limitations) can affect message delivery.</p>
+      <h3>4. Prohibited Use</h3>
+      <p>The user shall be prohibited from sending unsolicited marketing messages, violating any applicable laws or third-party rights and interfering with or disrupting the services or networks connected to the service.</p>
+    </div><!-- /tab23 -->
+
+  </div><!-- /content -->
+</div><!-- /container_tab -->
+
+<script>
+  // FIX: Robust openTab — handles both button clicks and programmatic calls
+  function openTab(evt, tabId, buttonId) {
+    // Prevent default if this is a real click on an <a>
+    if (evt && evt.preventDefault) evt.preventDefault();
+
+    // Hide all tab content panels
+    document.querySelectorAll('.tab-content').forEach(function(tc) {
+      tc.classList.remove('active');
+    });
+
+    // Remove active class from all sidebar buttons
+    document.querySelectorAll('.sidebar button.tablink').forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+
+    // Show selected panel
+    var panel = document.getElementById(tabId);
+    if (panel) panel.classList.add('active');
+
+    // FIX: Determine which button to highlight
+    var targetBtn = null;
+
+    if (buttonId) {
+      // Explicit button ID passed (used by inline links in content)
+      targetBtn = document.getElementById(buttonId);
+    } else if (evt && evt.currentTarget && evt.currentTarget.classList.contains('tablink')) {
+      // Clicked a sidebar button directly
+      targetBtn = evt.currentTarget;
+    }
+
+    if (targetBtn) targetBtn.classList.add('active');
+
+    // On mobile: scroll sidebar so active button is visible
+    if (targetBtn && window.innerWidth <= 768) {
+      var sidebar = document.querySelector('.sidebar');
+      var btnTop = targetBtn.offsetTop;
+      var sidebarHeight = sidebar.clientHeight;
+      sidebar.scrollTop = btnTop - sidebarHeight / 3;
+    }
+  }
+</script>
+<?php get_footer('sms'); ?>

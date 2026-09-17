@@ -1,0 +1,412 @@
+/* ═══════════════════════════════════════════════════════════════
+   newhome-sections.css
+   Scope: Loaded ONLY on the SMS homepage (newhome-sms.php)
+   Contains: all page section styles — hero through contact form
+   No dependency on new-header-footer.css (self-contained)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   ROOT VARIABLES (self-contained duplicate)
+   ───────────────────────────────────────────────────────────── */
+/*#three60-hp-root {*/
+/*    --brand-zo: #C4152A;*/
+/*    --brand: #0057B8;*/
+/*    --brand-light: #E8F0FB;*/
+/*    --brand-mid: #CCE0F7;*/
+/*    --brand-dark: #004a9e;*/
+/*    --brand-bg: #0056b3;*/
+/*    --grn: #1A7A2E;*/
+/*    --grn-l: #E4FCE8;*/
+/*    --ink: #1a1a1a;*/
+/*    --ink2: #444;*/
+/*    --ink3: #777;*/
+/*    --ink4: #aaa;*/
+/*    --bdr: #e2e2e2;*/
+/*    --bg: #fff;*/
+/*    --bg2: #F7F7F5;*/
+/*    --bg3: #EFEFEB;*/
+/*    --sh: 0 4px 16px rgba(0, 0, 0, .07);*/
+/*    --sh-lg: 0 16px 48px rgba(0, 0, 0, .12), 0 4px 16px rgba(0, 0, 0, .07);*/
+/*}*/
+
+/* ─────────────────────────────────────────────────────────────
+   1. HERO
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .hero {
+    padding: 80px 0;
+    text-align: center;
+    background: url('/wp-content/uploads/2026/08/image-90.webp') center center / cover no-repeat;
+}
+
+#three60-hp-root .h-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #F0F7FF;
+    color: #0056b3;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid #CCE0F7;
+}
+
+#three60-hp-root .hero-h1 {
+    font-size: 45px;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 24px;
+}
+
+#three60-hp-root .hero-h1 .kw { color: var(--brand); }
+
+#three60-hp-root .hero-sub {
+    font-size: 15px;
+    color: var(--ink2);
+    max-width: 625px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+}
+
+#three60-hp-root .btn-brand {
+    background-color: #0057B8;
+    border: none;
+    color: #fff;
+}
+
+#three60-hp-root .btn-brand:hover {
+    background-color: #004a9e;
+    color: #fff;
+}
+
+#three60-hp-root .btn-ghost {
+    border: 1px solid #e2e2e2;
+    background: #fff;
+    color: var(--ink);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. PROOF STRIP
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .proof-item {
+    position: relative;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#three60-hp-root .proof-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#three60-hp-root .pn {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1;
+}
+
+#three60-hp-root .pl {
+    font-size: 11px;
+    color: #888;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: left;
+}
+
+#three60-hp-root .proof-stars {
+    display: flex;
+    gap: 2px;
+    color: #001F3F;
+}
+
+#three60-hp-root .proof-stars i { font-size: 11px; }
+
+/* ─────────────────────────────────────────────────────────────
+   3. COMMON SECTION STYLES
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .sec { padding: 80px 0; }
+
+#three60-hp-root .kicker {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--brand);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+}
+
+#three60-hp-root .sh2 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -1.2px;
+    margin-bottom: 20px;
+}
+
+#three60-hp-root .ssub {
+    font-size: 14px;
+    color: var(--ink2);
+    margin-bottom: 48px;
+    line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. CARDS (shared base)
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .card {
+    background: #fff;
+    border: 1px solid var(--bdr);
+    padding: 28px;
+    transition: all .2s;
+    height: auto !important;
+}
+
+#three60-hp-root .card:hover {
+    box-shadow: var(--sh-lg);
+    transform: translateY(-4px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   5. STATS CARDS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .stat-badge {
+    font-size: 11px;
+    font-weight: 700;
+    border-color: #CCE0F7 !important;
+    color: #0057B8 !important;
+}
+
+#three60-hp-root .st-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0057B8;
+    letter-spacing: -1px;
+}
+
+#three60-hp-root .st-h {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #000;
+}
+
+#three60-hp-root .st-p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. BLUE CARD (ROI / metrics bar)
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .blue-card-pad { padding: 48px; }
+#three60-hp-root .blue-card-h   { font-size: 16px; }
+#three60-hp-root .blue-card-p   { line-height: 1.6; }
+#three60-hp-root .roi-num       { font-weight: 700; color: #0057B8; }
+
+/* ─────────────────────────────────────────────────────────────
+   7. CHANNEL CHIPS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .chip-channel {
+    font-size: 13px;
+    font-weight: 600;
+    background: #fff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8. FEATURE CARDS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .feat-arrow { text-decoration: none; }
+
+/* ─────────────────────────────────────────────────────────────
+   9. AI AGENTS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .ag-h { font-size: 17px; }
+
+/* ─────────────────────────────────────────────────────────────
+   10. GETTING STARTED TABS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .gs-tab {
+    border-left: 3px solid transparent;
+    transition: all .15s;
+    cursor: pointer;
+    background: #fff;
+}
+
+#three60-hp-root .gs-tab:hover      { background: var(--bg2) !important; }
+#three60-hp-root .gs-tab.active-tab { background: #fff; opacity: 1 !important; }
+
+#three60-hp-root .gs-panel        { display: none; }
+#three60-hp-root .gs-panel.active { display: block; }
+
+#three60-hp-root .gs-pad   { padding: 28px; }
+#three60-hp-root .gs-bdr-b { border-bottom: 1px solid var(--bdr); }
+
+#three60-hp-root .gs-step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    flex-shrink: 0;
+    background: var(--brand);
+    transition: background .3s;
+}
+
+#three60-hp-root .gs-step-h {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+}
+
+#three60-hp-root .gs-step-p {
+    font-size: 14px;
+    color: var(--ink2);
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+
+#three60-hp-root .gs-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+#three60-hp-root .gs-bullets li {
+    font-size: 13px;
+    color: var(--ink2);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+#three60-hp-root .gs-bullets li::before {
+    content: '✓';
+    font-weight: 800;
+    font-size: 12px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    color: var(--brand);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   11. CTA BARS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .cta-bar-h    { font-size: 32px; }
+#three60-hp-root .btn-cta-light { border-radius: 8px; font-size: 15px; }
+
+/* ─────────────────────────────────────────────────────────────
+   12. INDUSTRY CARDS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .ind-card {
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid #eee !important;
+}
+
+#three60-hp-root .ind-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+#three60-hp-root .ind-card i { color: var(--brand); }
+#three60-hp-root .ind-link   { color: #0057B8 !important; }
+
+/* ─────────────────────────────────────────────────────────────
+   13. TESTIMONIALS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .testimonial-p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   14. RESOURCE CARDS
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .res-card {
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+#three60-hp-root .res-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+}
+
+#three60-hp-root .res-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#three60-hp-root .res-body h4 { margin-bottom: 15px !important; }
+
+#three60-hp-root .rb-btn {
+    margin-top: auto;
+    background: #0056b3 !important;
+    border-color: #0056b3 !important;
+    color: #fff !important;
+}
+
+#three60-hp-root .img-card-h {
+    height: 250px;
+    object-fit: cover;
+}
+
+#three60-hp-root .badge-tag {
+    font-size: 11px;
+    border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   15. FAQ
+   ───────────────────────────────────────────────────────────── */
+#three60-hp-root .faq-item { transition: background 0.3s ease; }
+#three60-hp-root .faq-item.open { background: #f8f9fa; }
+
+#three60-hp-root .faq-q {
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#three60-hp-root .faq-q i { transition: transform 0.3s ease; }
+#three60-hp-root .faq-item.open .faq-q i { transform: rotate(45deg); }
+
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE — sections only
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    #three60-hp-root .hero-h1 { font-size: 36px; }
+
+    #three60-hp-root .proof-item {
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    #three60-hp-root .proof-item::after { display: none; }
+}
+

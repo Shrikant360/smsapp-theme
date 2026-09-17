@@ -1,0 +1,891 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+.container{
+    max-width: 1200px !important;
+}
+/* -------------------------------------------Navbar----------------------- */
+#header p{
+    font-weight: 500;
+}
+.nav-icon{
+    width:40px;
+}
+nav{
+    padding: 15px 0;
+}
+.logo img{
+    width: 200px;
+}
+nav{
+    margin-top: 10px;
+}
+nav a{
+    padding: 0 8px;
+}
+nav p{
+    color: #4b5e6f;
+    font-size: 13px;
+    margin-top: 12px;
+   
+}
+/* ----------------------------------------Banner Section-------------------------------- */
+#banner{
+    background-image: url('../img/banner-img-1.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 120vh;
+    color: #fff;
+    padding-top: 80px;
+}
+.banner-content h1{
+    font-size: 55px;
+    /* font-weight: bold; */
+}
+.banner-content p{
+    font-size: 40px;
+}
+.banner-content h3{
+    margin-top: 55px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.banner-content h6{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+.banner-content ul{
+    margin-bottom: 35px;
+}
+.banner-content ul li{
+    font-size: 18px;
+    margin-left: 30px;
+
+}
+.banner-left-section h4{
+    font-weight: bold;
+    font-size: 26px;
+}
+.banner-left-section h5{
+    padding-top:95px;
+    /* font-weight: bold; */
+    font-size: 20px;
+}
+.form-row{
+    margin-top:25px;
+}
+.form-control{
+    border-radius: 0px !important;
+    font-size: 14px !important;
+    padding: 15px 15px !important;
+    box-shadow: 2px 2px 1px 1px rgba(1, 1, 97, 0.432) !important;
+}
+.btn-modify{
+display:inline-block;
+border-radius: 0px !important;
+width: 100% !important;
+color: #fff !important;
+background-color: #f26c4f !important;
+font-weight: bold !important;
+font-size: 17px !important;
+padding: 15px 15px !important;
+box-shadow: 2px 2px 1px 1px rgba(1, 1, 97, 0.432) !important;
+overflow: auto;
+}
+.btn-modify:hover{
+background: #b92909 !important;
+color: #fff !important;
+}
+ /* --------------------------------------SMS and MMS Section-------------- */
+#sms{
+    padding: 80px 0;
+}
+.sms-img{
+    width: 100%;
+}
+.sms-content h1{
+    font-size: 45px;
+    font-weight: bold;
+    color:black;
+}
+.sms-content{
+    padding-top:55px;
+}
+.sms-content h2{
+    margin-top: 30px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #7c7c7c;
+    margin-bottom: 40px;
+}
+ #sms a{
+     text-decoration: none;
+     font-size: 24px;
+     padding: 15px 15px;
+     color: #fff;
+     background-color: #f26c4f;
+     font-weight: bold;
+ }
+ #sms a:hover{
+     background: #b92909;
+ }
+
+ /* ----------------------------------5 Star Section---------------------- */
+
+ #star{
+    margin-top: 115px;
+     background-color: #fafafa;
+ }
+.star-content{
+    position: absolute;
+    top: 300px;
+    left: 0;
+    right: -50px;
+    background: #fafafa;
+    padding: 44px 0;
+    z-index: 1;
+ }
+ .para-border{
+     border: 1px solid #2e5bea;
+     border-radius: 8px;
+     font-size: 18px;
+    color: #4f4f4f;
+    padding: 20px 35px;
+}
+.star-content h1{
+    font-size: 45px;
+    font-weight: bold;
+}
+.star-content p{
+    line-height: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #0064fe;
+}
+.star-right-content{
+    padding-top: 55px;
+    padding-bottom:55px;
+}
+.star-right-content h2{
+    font-weight: bold;
+    color: #242424;
+    font-size: 32px;
+}
+.star-right-content h6{
+    color: #0064fe;
+    font-size: 30px;
+    margin-bottom:40px;
+}
+/* .signature p{
+    margin-left: 350px;
+    color: #4f4f4f;
+} */
+.signature-para{
+    color: #4f4f4f;
+    margin-top: 22px;
+    margin-left: 323px;
+}
+.fa.fa-quote-right{
+    color: #cacaca;
+    font-size: 20px;
+}
+.fa.fa-quote-left{
+    color: #cacaca;
+    font-size: 20px;
+}
+/* -----------------------------------------------Communication Section------------------- */
+.communication-img{
+    width: 400px;
+    padding-top: 284px;
+}
+#communication hr{
+    width:79%;
+}
+.banner-image{
+    background-image: url('../img/SMS\ Landing\ Page-2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.comm-content{
+    padding-top: 90px;    
+}
+.comm-content h1{
+  font-weight: bold;
+  font-size: 42px;
+  color: #000;
+}
+.comm-content h6{
+    font-size: 30px;
+    color: #7d7d7d;
+    margin-top: 22px;
+  }
+
+  .comm-content h4 {
+    font-size: 23px;
+    color: #242424;
+    margin-top: 65px;
+}
+.comm-content p {
+    font-size: 20px;
+    color: #373737;
+}
+
+/* --------------------------------------Pioneer No Code Communication------------- */
+#pioneer{
+    padding:80px 0;
+}
+.no-code-communication-img{
+    width: 100%;
+    padding-top: 300px;
+}
+
+.head{
+    margin-left: 16px;
+}
+
+.head h1{
+color: #0067fc;
+font-size: 39px;
+font-weight: bold;
+}
+
+.head h6{
+    font-size: 33px;
+    color: #7c7c7c;
+}
+
+.pioneer-content{
+    margin-top: 50px;
+}
+
+.pioneer-content h4{
+    font-weight: bold;
+    color: #000;
+    font-size: 22px;
+}
+
+.pioneer-content p{
+    font-size: 18px;
+    color: #373737;
+    font-weight: 400;
+}
+
+/* -------------------------------------------Tight-Knit Compatibility Section-------------- */
+#tight{
+    padding: 50px 0;
+    background-color: #2e5bea;
+    color: #fff;
+}
+.tight-img{
+    width:63%;
+    margin-top: 180px;
+}
+.tight-content h1{
+    font-size: 41px;
+    font-weight: bold;
+}
+
+.tight-content h6{
+    font-size: 35px;  
+    font-weight: 400; 
+}
+.tight-content ul{
+    margin-top: 30px;
+}
+
+.tight-content ul li{
+    font-size: 19px;   
+    line-height: 32px;
+    font-weight: 400;
+    margin-left: 30px;
+    
+}
+
+/* -----------------------------------Bell Content----------------------- */
+#bell{
+    background-color: #293f88;
+    color: #fff;
+    padding: 50px 0;
+}
+.bell-img{
+    width: 35%;
+    margin-top: 235px;
+}
+
+.bell-para{
+    font-size: 21px;
+    margin-top: 15px;
+}
+
+/* -----------------------------------------End Section--------------------- */
+
+#end{
+    padding: 50px 0;
+}
+
+.end-content h1{
+    font-size: 41px;
+    font-weight: bold;
+    color: #000;
+}
+
+.end-content p{
+    font-size: 31px;
+    font-weight: bold;
+    color: #7d7d7d;
+    margin-bottom: 35px;
+}
+
+#end .end-content a{
+    margin-top: 35px;
+    text-decoration: none;
+     font-size: 25px;
+     padding: 15px 15px;
+     color: #fff;
+     background-color: #f26c4f;
+     font-weight: bold;
+    
+}
+
+#end .end-content a:hover{
+    background: #b92909;
+}
+
+/* -------------------------------Footer Section-------------------- */
+#footer{
+    background: black;
+    color: #eaeaea;
+    text-align: center;
+     
+}
+.footer-para{
+    text-align: center;
+    font-size: 17px;
+    padding: 20px 15px; 
+    margin: auto;
+}
+
+
+/* ------------------------------------Media Queries--------------- */
+@media only screen and (max-width:480px){
+
+    #banner{
+        height: auto;
+        padding-top: 18px;
+    }
+    #nav-bar{
+        padding: 10px 0;
+    }
+    #header .logo img{
+        justify-content: center;
+    }
+    .logo img {
+        width: 105px;
+    }
+    .nav-icon {
+        width: 24px;
+    }
+    .banner-content h3 {
+        font-size: 25px;
+    }
+    #sms{
+        padding:0px;
+    }
+    .sms-img {
+        margin-top: 67px;
+    }
+
+    .star-content {
+       position: static !important;
+    }
+    .navbar-brand img {
+        width: 150px;
+        padding-left: 15px;
+    }
+
+    #header p{
+        display:none;
+    }
+    .banner-content p {
+        font-size: 20px;
+    }
+    .banner-content h1 {
+        font-size: 43px;
+    }
+    .banner-left-section h4 {
+        font-size: 21px;
+    }
+    .form-control {
+        font-size: 12px !important;
+        padding: 9px 9px !important;
+    }
+    .banner-left-section h5 {
+        padding-top: 39px;
+        font-size: 24px;
+    }
+    .btn-modify {
+        font-size: 14px !important;
+        padding: 9px 9px !important;
+        margin-bottom: 40px !important;
+    }
+    .sms-content h1 {
+        font-size: 26px;
+    }
+    .sms-content h2 {
+        font-size: 16px;
+    }
+    #sms a {
+        font-size: 13px;
+    }
+    #star {
+        margin-top: 47px;
+    }
+    .star-content {
+        padding-top: 30px;
+    }
+    .star-content h1 {
+        font-size: 28px;
+    }
+    .star-content p {
+        font-size: 23px;
+    }
+    .star-right-content {
+        padding-top: 0px;   
+    }
+    .star-right-content h2 {
+        font-size: 20px;
+    }
+    .star-right-content h6 {
+        font-size: 19px;
+    }
+    .signature p {
+        margin-left: 140px;
+    }
+    .communication-img{
+        padding-top: 0px;
+    }
+    .signature p {
+        margin-left: 163px;
+    }
+    .communication-img {
+        width: 298px;
+        margin-top: 72px;
+    }
+    .comm-content {
+        padding-top: 52px;
+        margin-left: 0px;
+        padding-bottom: 32px;
+    }
+    .comm-content h1 {
+        font-size: 24px;
+    }
+    .comm-content h6 {
+        font-size: 15px;
+    }
+    .comm-content h4 {
+        font-size: 15px;
+        margin-top: 46px;
+    }
+    .comm-content p {
+        font-size: 16px;
+    }
+    .head h1 {
+        font-size: 27px;
+    }
+    .head h6 {
+        font-size: 15px;
+    }
+    
+    .no-code-communication-img {
+        padding-top: 90px;
+    }
+    #pioneer hr{
+        width: 87%;
+    }
+    #communication hr{
+        width:100%;
+    }
+
+    .pioneer-content h4 {
+        font-size: 15px;
+    }
+    .pioneer-content p {
+        font-size: 14px;
+    }
+    .tight-img {
+        margin-top: 0px;
+        margin-left: 60px;
+    }
+    .tight-content h1 {
+        font-size: 23px;
+        margin-top: 37px;
+    }
+    .tight-content h6 {
+        font-size: 21px;
+    }
+    .tight-content ul li {
+        font-size: 17px;
+    }
+    .bell-img {
+        margin-top: 0px;
+        margin-left: 101px;
+    }
+    .end-content h1 {
+        font-size: 21px;
+    }
+    .end-content p {
+        font-size: 16px;
+    }
+    #end .end-content a {
+        font-size: 12px;
+    }
+    #end {
+        padding: 50px 18px;
+    }
+    .footer-para {
+        font-size: 12px;
+    }
+        
+}
+/* --------------------Media Queries --------------------------*/
+@media only screen and (max-width:768px) and (min-width:480px) {
+
+    .signature p {
+        margin-left: 161px;
+    }
+    .star-content h1 {
+        font-size: 33px;
+    }
+    .star-content p {
+        font-size: 30px;
+    }
+    #header p {
+        display:none;
+    }
+    .logo img {
+        padding: 6px 0;
+    }
+
+    #banner{
+        height: auto;
+    }
+    .banner-content p {
+        font-size: 32px;
+    }
+    .banner-content h3 {
+        font-size: 24px;
+    }
+    #banner ul{
+        margin-bottom: 118px;
+    }
+    .banner-left-section h5 {
+        font-size: 20px;
+    }
+    .banner-left-section h4 {
+        font-size: 30px;
+    }
+    .form-control {
+        font-size: 14px !important;
+    }
+    .btn-modify {
+        font-size: 10px !important;
+        margin-bottom: 35px;
+    }
+    .sms-content h1 {
+        font-size: 30px;
+    }
+    .sms-content h2 {
+        font-size: 19px;
+    }
+    #sms a {
+        font-size: 16px;
+    }
+    #sms {
+        padding: 121px 0;
+    }
+    #star{
+        margin: 0px;
+    }
+    .star-right-content h2 {
+        font-size: 26px;
+    }
+    .star-right-content h6 {
+        font-size: 24px;
+    }
+    #pioneer hr{
+        width:98%;
+    }
+    #communication hr{
+        width:100%;
+    }
+    .comm-content h1 {
+        font-size: 28px;
+    }
+    .comm-content h6 {
+        font-size: 18px;
+    }
+    .communication-img {
+        padding-top: 243px;
+    }
+    .comm-content h4 {
+        font-size: 17px;
+    }
+    .comm-content p {
+        font-size: 18px;
+    }
+    .head h1 {
+        font-size: 40px;
+    }
+    .head h6 {
+        font-size: 35px;
+    }
+    .pioneer-content h4 {
+        font-size: 20px;
+    }
+    .pioneer-content p {
+        font-size: 17px;
+    }
+    .tight-img {
+        width: 100%;
+        margin-top: 173px;
+    }
+    .tight-content h1 {
+        font-size: 38px;
+    }
+    .tight-content h6 {
+        font-size: 34px;
+    }
+    .bell-img {
+        width: 64%;
+        margin-top: 159px;
+    }
+    .banner-left-section h5 {
+        padding-top: 0px;
+    }
+    
+}
+
+/* ----------------------------------Media Queries------------ */
+@media only screen and (max-width:1024px) and (min-width:768px){
+    .btn-modify {
+        font-size: 10px !important;
+    }
+    #banner{
+        height: auto;
+
+    }
+    #banner ul{
+        margin-bottom: 141px;
+    }
+    .banner-left-section h4 {
+        font-size: 22px;
+    }
+    .btn-modify {
+        font-size: 14px !important;
+    }
+    .sms-content h1 {
+        font-size: 33px;
+    }
+    .star-content {
+        
+        top: 408px;
+    }
+    .sms-content h2 {
+        font-size: 26px;
+    }
+    #sms a{
+        font-size: 16px;
+    }
+    #star {
+        margin-top: 0px;
+    }
+    .star-content h1 {
+        font-size: 39px;
+    }
+    .star-content {
+        padding-left: 30px;
+    }
+    .star-content p {
+         font-size: 31px;
+
+    }
+   
+    .signature p {
+        margin-left: 164px;
+    }
+    .communication-banner {
+         padding-left: 0px; 
+         padding-right: 0px; 
+    }
+    .comm-content {
+        margin-left: 46px;
+    }
+    .comm-content h1 {
+        font-size: 36px;
+    }
+    .comm-content h6 {
+        font-size: 24px;
+    }
+    .comm-content h4 {
+        font-size: 22px;
+    }
+    .comm-content p {
+        font-size: 20px;
+    }
+    .communication-img {
+        width: 287px;
+    }
+    .head h6 {
+        font-size: 31px;
+    }
+    .head h1 {
+        font-size: 34px;
+    }
+    .tight-img {
+        width: 100%;
+        margin-top: 141px;
+    }
+    #communication hr{
+        width:100%;
+    }
+    
+}
+@media only screen and (max-width:767px){
+    .signature p{
+        margin-left: 140px !important;
+    }
+    .star-content{
+        right: 0 !important;
+    }
+}
+@media only screen and (max-width:540px){
+    .star-content {
+        position: static !important;
+     }
+     /* .head h1 {
+        font-size: 26px;
+    }
+    .head h6 {
+        font-size: 25px;
+    }
+    .no-code-communication-img {
+        padding-top: 37px;
+    }
+    .tight-img {
+        width: 43%;
+        margin-top: 0px;
+    }
+    .bell-img {
+        width: 29%;
+        margin-top: 12px;
+    }
+    .end-content h1 {
+        font-size: 35px;
+    }
+    .end-content p {
+        font-size: 26px;
+    }
+    .sms-content h1 {
+        font-size: 38px;
+    }
+    .sms-content h2 {
+        font-size: 25px;
+    }
+    #sms a {
+        font-size: 23px;
+    }
+    .star-content h1 {
+        font-size: 39px;
+    }
+    .star-content p {
+        font-size: 33px;
+    }
+    .star-right-content h2 {
+        font-size: 31px;
+    }
+    .communication-img {
+        padding-top: 28px;
+    }
+    .comm-content h1 {
+        font-size: 35px;
+    }
+    .comm-content h6 {
+        font-size: 24px;
+    }
+    .comm-content h4 {
+        font-size: 20px;
+    }
+    .end-content h1 {
+        font-size: 36px;
+        padding: 16px;
+    }
+    .end-content p {
+        font-size: 26px;
+        padding-left: 16px;
+    }
+    #end .end-content a {
+        font-size: 20px;
+        margin-left: 16px;
+    } */
+    .communication-img {
+        padding-top: 28px;
+    }
+    .no-code-communication-img {
+        padding-top: 37px;
+    }
+    .tight-img {
+        width: 43%;
+        margin-top: 0px;
+    }
+    .bell-img {
+        width: 29%;
+        margin-top: 12px;
+    }
+    .end-content h1 {
+        font-size: 27px;
+        padding-left: 0px;
+    }
+    .end-content p {
+        font-size: 17px;
+        padding-left: 0px;
+    }
+    #end .end-content a {
+        font-size: 12px;
+        margin-left: 0px;
+    } 
+    .btn-modify {
+        font-size: 13px !important;
+    }
+}
+
+#accordian_custom .vc_tta-panel, .sp-easy-accordion>.sp-ea-single {
+    border-bottom: 2px solid #e4e4e4 !important;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.spcollapse p {
+    border-left: 5px solid #e06e5a;
+    margin-left: 20px;
+    padding-left: 25px;
+}
+
+@media(max-width:767px){
+    .headers .slide-out-menu .menu-panels .menu-panel[data-menu="industries"] ul {
+    max-height: 500px;
+    overflow: auto;
+}
+}
+
+@media (max-width:767px){
+	.headers .slide-out-menu .menu-panel ul~.menu-panel.is-active[data-menu="Additional Features"] ul, .headers .slide-out-menu .menu-panel ul~.menu-panel.is-active
+[data-menu="Channels"] ul {
+    overflow-y: scroll;
+    height: 70vh;
+	}
+}
