@@ -15,7 +15,9 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
+          use_insecure_cipher: true
           script: |
             cd /home2/stagixcm/repositories/smsapp-theme
             git fetch origin
