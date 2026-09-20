@@ -18,6 +18,11 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           port: ${{ secrets.SSH_PORT }}
           use_insecure_cipher: true
+          cipher: |
+            diffie-hellman-group-exchange-sha256
+            aes128-ctr
+            aes192-ctr
+            aes256-ctr
           script: |
             cd /home2/stagixcm/repositories/smsapp-theme
             git fetch origin
