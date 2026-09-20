@@ -1,4 +1,4 @@
-name: Auto Deploy to cPanel
+name: Auto Deploy to cPanel via FTP
 
 on:
   push:
@@ -6,19 +6,17 @@ on:
       - main
 
 jobs:
-  deploy:
+  web-deploy:
+    name: Deploy Theme Files
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger cPanel Git Pull & Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Sync files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          use_insecure_cipher: true
-          script: |
-            cd /home2/stagixcm/repositories/smsapp-theme
-            git fetch origin
-            git reset --hard origin/main
-            /usr/local/cpanel/bin/git-repo-deploy --repo-path=/home2/stagixcm/repositories/smsapp-theme
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
