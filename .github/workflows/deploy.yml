@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+# Prevents multiple pushes from running at the same time and slowing down FTP transfers
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   web-deploy:
     name: Deploy Theme Files
@@ -12,6 +17,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Required for the FTP action to perform delta comparisons
 
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -21,3 +28,9 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           server-dir: wp-content/themes/thegem-child/
+          exclude: |
+            **/.git**
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
