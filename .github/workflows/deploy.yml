@@ -1,0 +1,23 @@
+name: Auto Deploy to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger cPanel Git Pull & Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /home2/stagixcm/repositories/smsapp-theme
+            git fetch origin
+            git reset --hard origin/main
+            /usr/local/cpanel/bin/git-repo-deploy --repo-path=/home2/stagixcm/repositories/smsapp-theme
