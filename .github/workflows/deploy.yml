@@ -20,4 +20,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
-          server-dir: qa.360smsapp.in/wp-content/themes/thegem-child/
+          server-dir: wp-content/themes/thegem-child/
