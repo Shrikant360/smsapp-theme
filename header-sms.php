@@ -36,7 +36,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <meta name="msvalidate.01" content="0C1762AF7C2536EFC2F53A0F6BC5A04B" />
 <meta name="google-site-verification" content="QQtN8omDpc2hzU4CYIMz9gbRIl5tkLll9yJ42DeGk_k" />
 <meta name="p:domain_verify" content="720aa08f1e0162ac6aeb43207ff703e4" />
-<script src="https://webchat.360degreeapps.com/webchat/widget?webchatkey=Webchatconsulting&key=qgu85bA2bP3QLYb%2… crossorigin="anonymous"></script>
 <div class="whatsapp-content">
 
     <a onclick="dataLayer.push({
