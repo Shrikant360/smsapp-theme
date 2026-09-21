@@ -45,7 +45,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div>
             <img src="<?php echo esc_url( home_url( '' ) ); ?>/wp-content/uploads/2026/08/Untitled-1.png" width="30" height="30" alt="logo" data-lazy-src="<?php echo esc_url( home_url( '' ) ); ?>/wp-content/uploads/2026/08/Untitled-1.png" data-ll-status="loaded" class="entered lazyloaded"><noscript><img src="<?php echo esc_url( home_url( '' ) ); ?>/wp-content/uploads/2026/08/Untitled-1.png" width="30" height="30"
                 alt="logo"></noscript>
-            <span>Live Chat Whatsapp Chat</span>
+            <span>Live Chat</span>
         </div>
     </a>
 </div>
